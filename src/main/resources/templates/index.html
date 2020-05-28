@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Testing web consumer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="jQueryFetchData.js"></script>
+</head>
+<body>
+<p th:text="'Hello, reload test ' + ${name} + '!'"/>
+<div>
+    <p class="received-id">The ID is </p>
+    <p class="received-name">The content is </p>
+</div>
+</body>
+</html>
