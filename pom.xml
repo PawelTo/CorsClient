@@ -10,6 +10,7 @@
 
     <properties>
         <spring.boot.starter.parent.version>2.2.7.RELEASE</spring.boot.starter.parent.version>
+        <swagger.version>1.4.0</swagger.version>
     </properties>
 
     <parent>
@@ -20,10 +21,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
