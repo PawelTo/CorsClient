@@ -9,6 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
+        <org.projectlombok>1.18.12</org.projectlombok>
         <spring.boot.starter.parent.version>2.2.7.RELEASE</spring.boot.starter.parent.version>
         <swagger.version>1.4.0</swagger.version>
     </properties>
@@ -20,6 +21,12 @@
     </parent>
 
     <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok}</version>
+                <scope>provided</scope>
+            </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
