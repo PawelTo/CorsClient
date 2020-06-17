@@ -1,4 +1,4 @@
-package pl.pawel.app.models;
+package pl.pawel.app.domain.models;
 
 public class CorsRecivedModel {
     private int id;
