@@ -19,7 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Tag(name = V1FilmController.API_PAHT)
 public class V1FilmController {
 
-    static final String API_PAHT = "v1/api/films";
+    static final String API_PAHT = "api/v1/films";
 
     private final FilmRepository filmRepository;
 
