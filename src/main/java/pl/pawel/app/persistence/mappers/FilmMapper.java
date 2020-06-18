@@ -6,12 +6,12 @@ import pl.pawel.app.persistence.entity.FilmEntity;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ActorMapper.class)
 public interface FilmMapper {
 
     Film mapToDomain(FilmEntity filmEntity);
 
-    List<Film> mapToDomain(List<FilmEntity> all);
+    List<Film> mapToDomain(List<FilmEntity> films);
 
     FilmEntity mapToPersistence(Film film);
 }

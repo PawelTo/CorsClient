@@ -9,36 +9,34 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @AllArgsConstructor
 @Data
 @DynamicUpdate
-@Entity(name = "Film")
+@Entity(name = "Actor")
 @NoArgsConstructor
-public class FilmEntity {
+public class ActorEntity {
 
-    @JoinTable(name = "film_actor",
-            joinColumns = @JoinColumn(name = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id"))
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private Set<ActorEntity> actors = new HashSet<>();
+    private int age;
 
     @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP not null", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdTimestamp;
 
+    @GeneratedValue(strategy = IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 64)
     private String name;
 
-    @Column(length = 64, nullable = false)
-    private String producer;
+    @Column(length = 5)
+    private String sex;
 
-    private String state;
+    @Column(length = 64)
+    private String surname;
 
     @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP not null", nullable = false)
     @UpdateTimestamp

@@ -9,4 +9,6 @@ public interface FilmPersistence {
     Long add(Film film);
 
     List<Film> findAll();
+
+    void update(Film film);
 }

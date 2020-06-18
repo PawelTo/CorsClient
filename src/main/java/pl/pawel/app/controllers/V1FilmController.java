@@ -13,11 +13,11 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping(V1FilmsController.API_PAHT)
+@RequestMapping(V1FilmController.API_PAHT)
 @RequiredArgsConstructor
 @RestController
-@Tag(name = V1FilmsController.API_PAHT)
-public class V1FilmsController {
+@Tag(name = V1FilmController.API_PAHT)
+public class V1FilmController {
 
     static final String API_PAHT = "v1/api/films";
 
