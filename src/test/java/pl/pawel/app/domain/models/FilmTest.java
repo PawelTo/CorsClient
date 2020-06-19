@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.pawel.app.domain.FilmRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.mockito.BDDMockito.given;
 
@@ -33,6 +34,25 @@ class FilmTest {
         // when
         film.add();
         // then
-        assertThat(film.getId(),greaterThan(0L));
+        assertThat(film.getId(), greaterThan(0L));
+    }
+
+    @Test
+    void testAttach() {
+        // when
+        film.attach(repository);
+        // then
+        assertThat(film.isAttached(), equalTo(true));
+    }
+
+    @Test
+    void testActorAdd() {
+        // given
+        film.attach(repository);
+        Actor actor = Actor.builder().build();
+        // when
+        film.actorAdd(actor);
+        // then
+        assertThat(film.getActors().contains(actor), equalTo(true));
     }
 }

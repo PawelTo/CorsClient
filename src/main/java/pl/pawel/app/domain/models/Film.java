@@ -9,8 +9,10 @@ import javax.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+import static java.util.Objects.nonNull;
 import static lombok.AccessLevel.NONE;
 
 @AllArgsConstructor
@@ -38,7 +40,12 @@ public class Film {
 
     private State state;
 
-    public Film add(){
+    public void actorAdd(Actor actor) {
+        actors.add(actor);
+        repository.getPersistence().update(this);
+    }
+
+    public Film add() {
         id = repository.getPersistence().add(this);
         return this;
     }
@@ -48,17 +55,12 @@ public class Film {
         return this;
     }
 
-    public void actorAdd(Actor actor){
-        actors.add(actor);
-        repository.getPersistence().update(this);
-    }
-
     @JsonIgnore
-    public boolean actorIsAdded(Actor actor){
-        return actors.contains(actor);
+    public boolean isAttached() {
+        return nonNull(repository);
     }
 
-    public enum State{
+    public enum State {
         TO_WATCH,
         WATCHED
     }
