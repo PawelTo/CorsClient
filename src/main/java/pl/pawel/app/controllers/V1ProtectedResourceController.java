@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class V1ProtectedResourceController {
 
-    static final String API_PAHT = "api/v1/security-resources";
+    static final String API_PAHT = "/api/v1/security-resources";
 
     @GetMapping(value= "/all")
     public String returnedForAll(){

@@ -16,14 +16,18 @@ import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.withSettings;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestInstance(PER_CLASS)
 class V1FilmControllerTest {
 
-    private static final String API_PATH = "api/v1/films";
+    private static final String API_PATH = "/api/v1/films";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private MockMvc mockMvc;
@@ -32,6 +36,7 @@ class V1FilmControllerTest {
 
     @BeforeAll
     void beforeAll() {
+        repository = mock(FilmRepository.class, withSettings().stubOnly().verboseLogging());
         mockMvc = MockMvcBuilders.standaloneSetup(new V1FilmController(repository))
                 .alwaysDo(print())
                 .build();
