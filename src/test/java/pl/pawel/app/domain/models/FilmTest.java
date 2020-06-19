@@ -8,6 +8,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.pawel.app.domain.FilmRepository;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.mockito.BDDMockito.given;
+
 @ExtendWith(MockitoExtension.class)
 class FilmTest {
 
@@ -17,12 +21,18 @@ class FilmTest {
     private Film film;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         film = Film.builder().build();
     }
 
     @Test
-    void test(){
-        film.getId();
+    void testAdd() {
+        // given
+        given(repository.getPersistence().add(film)).willReturn(10001L);
+        film.attach(repository);
+        // when
+        film.add();
+        // then
+        assertThat(film.getId(),greaterThan(0L));
     }
 }
