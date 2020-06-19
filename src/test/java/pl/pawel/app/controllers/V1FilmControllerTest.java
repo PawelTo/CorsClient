@@ -1,8 +1,8 @@
 package pl.pawel.app.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.pawel.app.domain.FilmRepository;
 import pl.pawel.app.domain.models.Film;
 
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.singletonList;

@@ -1,5 +1,6 @@
 package pl.pawel.app.domain.models;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
@@ -18,5 +19,10 @@ class FilmTest {
     @BeforeEach
     void beforeEach(){
         film = Film.builder().build();
+    }
+
+    @Test
+    void test(){
+        film.getId();
     }
 }
