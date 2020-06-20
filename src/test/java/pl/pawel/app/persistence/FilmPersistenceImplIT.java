@@ -1,0 +1,74 @@
+package pl.pawel.app.persistence;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.jdbc.Sql;
+import pl.pawel.app.domain.models.Film;
+import pl.pawel.app.persistence.mappers.FilmMapper;
+import pl.pawel.app.persistence.mappers.FilmMapperImpl;
+import pl.pawel.app.persistence.repositories.FilmEntityRepository;
+
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
+import static pl.pawel.app.domain.models.Film.State.TO_WATCH;
+
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTest
+@TestInstance(PER_CLASS)
+class FilmPersistenceImplIT {
+
+    private static final int FILMS_NUMBER = 3;
+
+    @Autowired
+    FilmPersistence persistence;
+
+    //TODO check, why Application context doesn't have beans created in method ITConfiguration
+    @TestConfiguration
+    static class ITConfiguration {
+
+        @Bean
+        public FilmMapper mapper() {
+            return new FilmMapperImpl();
+        }
+
+        @Bean
+        public FilmPersistence persistence(FilmMapper mapper, FilmEntityRepository entityRepository) {
+            return new FilmPersistenceImpl(entityRepository, mapper);
+        }
+    }
+
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:sql/films-truncate")
+    @Test
+    void testAdd() {
+        // given
+        Film film = Film.builder()
+                .producer("producer")
+                .name("name")
+                .state(TO_WATCH)
+                .build();
+        // when
+        Long id = persistence.add(film);
+        // then
+        assertThat(id, greaterThan(0L));
+    }
+
+    @Sql("classpath:sql/films-insert")
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:sql/films-truncate")
+    @Test
+    void testFindAll() {
+        // when
+        List<Film> films = persistence.findAll();
+        // then
+        assertThat(films, hasSize(FILMS_NUMBER));
+    }
+}
