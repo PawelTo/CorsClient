@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.pawel.app.domain.models.Film;
+import pl.pawel.app.junit.EnableIfDocker;
 import pl.pawel.app.persistence.mappers.ActorMapper;
 import pl.pawel.app.persistence.mappers.ActorMapperImpl;
 import pl.pawel.app.persistence.mappers.FilmMapper;
@@ -31,6 +32,7 @@ import static pl.pawel.app.domain.models.Film.State.TO_WATCH;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
+//@EnableIfDocker - TODO annotation is switched until it isn't ready
 @TestInstance(PER_CLASS)
 class FilmPersistenceImplIT {
 
