@@ -3,7 +3,6 @@ package pl.pawel.app.persistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 import pl.pawel.app.domain.models.Film;
 import pl.pawel.app.persistence.mappers.FilmMapper;
