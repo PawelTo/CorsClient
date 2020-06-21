@@ -23,6 +23,13 @@ public class V1FilmController {
 
     private final FilmRepository filmRepository;
 
+    @Operation(summary = "Add film")
+    @GetMapping(path="/add", produces = APPLICATION_JSON_VALUE)
+    public Film add() {
+        Film film = new Film().toBuilder().producer("producer").name("name").state(Film.State.TO_WATCH).repository(filmRepository).build();
+        return film.add();
+    }
+
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Fetch all films")
     public List<Film> getFilms() {

@@ -9,6 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
+        <org.liquibase.version>3.10.0</org.liquibase.version>
         <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.12</org.projectlombok.version>
         <swagger.version>1.4.0</swagger.version>
@@ -25,6 +26,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <!--<version>${org.liquibase.version}</version>-->
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>

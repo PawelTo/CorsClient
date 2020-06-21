@@ -1,0 +1,1 @@
+insert into film (name, producer, state) values ("name", "producer", "TO_WATCH");

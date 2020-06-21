@@ -2,13 +2,20 @@ package pl.pawel.app.persistence;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.pawel.app.domain.models.Film;
+import pl.pawel.app.persistence.mappers.ActorMapper;
+import pl.pawel.app.persistence.mappers.ActorMapperImpl;
 import pl.pawel.app.persistence.mappers.FilmMapper;
 import pl.pawel.app.persistence.mappers.FilmMapperImpl;
 import pl.pawel.app.persistence.repositories.FilmEntityRepository;
@@ -32,12 +39,16 @@ class FilmPersistenceImplIT {
     @Autowired
     FilmPersistence persistence;
 
-    //TODO check, why Application context doesn't have beans created in method ITConfiguration
     @TestConfiguration
     static class ITConfiguration {
 
         @Bean
-        public FilmMapper mapper() {
+        public ActorMapper actorMapper() {
+            return new ActorMapperImpl();
+        }
+
+        @Bean
+        public FilmMapper filmMapper() {
             return new FilmMapperImpl();
         }
 

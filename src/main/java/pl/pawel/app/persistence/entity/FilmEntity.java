@@ -38,6 +38,7 @@ public class FilmEntity {
     @Column(length = 64, nullable = false)
     private String producer;
 
+    @Column(length = 64, nullable = false)
     private String state;
 
     @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP not null", nullable = false)
