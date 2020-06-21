@@ -1,10 +1,12 @@
 package pl.pawel.app.persistence;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +23,7 @@ import pl.pawel.app.persistence.mappers.FilmMapper;
 import pl.pawel.app.persistence.mappers.FilmMapperImpl;
 import pl.pawel.app.persistence.repositories.FilmEntityRepository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,6 +36,7 @@ import static pl.pawel.app.domain.models.Film.State.TO_WATCH;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 //@EnableIfDocker - TODO annotation is switched until it isn't ready
+@Slf4j
 @TestInstance(PER_CLASS)
 class FilmPersistenceImplIT {
 
@@ -43,6 +47,15 @@ class FilmPersistenceImplIT {
 
     @TestConfiguration
     static class ITConfiguration {
+
+        @Bean
+        public DataSource createTestDataSource() {
+            log.info("Create datasource properties");
+            return DataSourceBuilder.create()
+                    .driverClassName("org.h2.Driver")
+                    .url("jdbc:h2:file:D:/Workspaces/File_DB/h2_CorsClient_ForIT")
+                    .build();
+        }
 
         @Bean
         public ActorMapper actorMapper() {
