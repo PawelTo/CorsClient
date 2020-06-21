@@ -1,0 +1,3 @@
+insert into film (name, producer, state) values ('name', 'producer', 'TO_WATCH');
+insert into film (name, producer, state) values ('name2', 'producer2', 'WATCHED');
+insert into film (name, producer, state) values ('name3', 'producer3', 'TO_WATCH');

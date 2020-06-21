@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.pawel.app.models.CorsRecivedModel;
-import pl.pawel.app.services.LocalHostCaller;
-import pl.pawel.app.services.RestCaller;
+import pl.pawel.app.domain.models.CorsRecivedModel;
+import pl.pawel.app.domain.services.LocalHostCaller;
 
 @RequestMapping(V1CorsController.API_PAHT)
 @RestController

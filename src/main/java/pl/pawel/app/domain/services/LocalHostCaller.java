@@ -1,10 +1,10 @@
-package pl.pawel.app.services;
+package pl.pawel.app.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import pl.pawel.app.models.CorsRecivedModel;
+import pl.pawel.app.domain.models.CorsRecivedModel;
 
 @Component
 public class LocalHostCaller implements RestCaller{
