@@ -28,7 +28,11 @@ public class CinemaProcessorImpl implements CinemaProcessor {
     @Override
     public CinemaPostProcessing process(CinemaProcessing processing) {
         List<CinemaItemStatus> itemStatusList = processItems(processing.getIdentity(), processing.getItems());
-        return null;
+        return CinemaPostProcessing
+                .builder()
+                .identityRequestId(processing.getIdentityRequestId())
+                .itemStatuses(itemStatusList)
+                .build();
     }
 
     private List<CinemaItemStatus> processItems(CinemaIdentity identity, List<CinemaItem> items) {
@@ -46,7 +50,7 @@ public class CinemaProcessorImpl implements CinemaProcessor {
             case ACTOR_ADD:
                 cinemaItemStatus = handleActorAdd(identity, item);
                 break;
-                //TODO implement all cases as show above
+            //TODO implement all cases as show above
             /*case ACTOR_REMOVE:
                 cinemaItemStatus = handleActorRemove(identity, item);
                 break;
@@ -66,13 +70,27 @@ public class CinemaProcessorImpl implements CinemaProcessor {
     }
 
     private CinemaItemStatus handleActorAdd(CinemaIdentity identity, CinemaItem item) {
-        Film film = filmRepository.findById(identity.getFilmId()).orElseGet(() -> addFilmFor(identity));
-        Actor actor = actorRepository.findByNameAndSurname(item.getValue().substring(2), item.getName());
-        if(film.getActors().contains(actor)){
-            return CinemaItemStatus.warning(item.getId(),"Actor already added");
+        Film film = filmRepository.findById(identity.getFilmId())
+                .orElseGet(() -> addFilmFor(identity));
+        Actor actor = actorRepository.findByNameAndSurname(item.getValue().substring(2), item.getName())
+                .orElseGet(() -> addActorFor(item));
+        if (film.getActors().contains(actor)) {
+            return CinemaItemStatus.warning(item.getId(), "Actor already added");
         }
         film.actorAdd(actor);
         return CinemaItemStatus.success(item.getId());
+    }
+
+    private Actor addActorFor(CinemaItem item) {
+        return buildActorFrom(item)
+                .attach(actorRepository)
+                .add();
+    }
+
+    private Actor buildActorFrom(CinemaItem item) {
+        return Actor.builder()
+                .name(item.getName())
+                .build();
     }
 
     private Film addFilmFor(CinemaIdentity identity) {
