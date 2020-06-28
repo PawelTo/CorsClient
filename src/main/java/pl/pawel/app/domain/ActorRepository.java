@@ -20,4 +20,8 @@ public class ActorRepository {
     public List<Actor> findAll() {
         return persistence.findAll();
     }
+
+    public Actor findByNameAndSurname(String name, String surname) {
+        return persistence.findByNameAndSurname(name, surname);
+    }
 }

@@ -7,10 +7,11 @@ import pl.pawel.app.persistence.mappers.ActorMapper;
 import pl.pawel.app.persistence.repositories.ActorEntityRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ActorPersistenceImpl implements ActorPersistence{
+public class ActorPersistenceImpl implements ActorPersistence {
 
     private final ActorEntityRepository repository;
     private final ActorMapper mapper;
@@ -23,5 +24,11 @@ public class ActorPersistenceImpl implements ActorPersistence{
     @Override
     public List<Actor> findAll() {
         return mapper.mapToDomain(repository.findAll());
+    }
+
+    @Override
+    public Optional<Actor> findByNameAndSurname(String name, String surname) {
+        return repository.findByNameAndSurname(name, surname)
+                .map(mapper::mapToDomain);
     }
 }
