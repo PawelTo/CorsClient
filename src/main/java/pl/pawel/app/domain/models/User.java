@@ -61,7 +61,7 @@ public class User {
             return role.getImportance() - authority.role.getImportance();
         }
 
-        enum Group {
+        public enum Group {
             G1,
             G2;
 
@@ -73,7 +73,7 @@ public class User {
         }
 
         @RequiredArgsConstructor
-        enum Role {
+        public enum Role {
             R1(1),
             R2(2);
 
