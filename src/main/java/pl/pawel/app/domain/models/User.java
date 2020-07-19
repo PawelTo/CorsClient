@@ -1,43 +1,88 @@
 package pl.pawel.app.domain.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 
 @Builder(toBuilder = true)
 @Data
+@JsonInclude(NON_EMPTY)
 public class User {
 
     private Access access;
 
-    private Authority authority;
+    private List<Authority> authorities;
 
     private String name;
 
     private String surname;
 
-    public class Access {
-        Authority.Role role;
+    public Access getAccess() {
+        return authorityOfHighestType().map(authority -> Access.builder()
+                .role(authority.getRole())
+                .build())
+                .orElse(null);
+    }
+
+    private Optional<Authority> authorityOfHighestType() {
+        return authorities.stream().max(Authority::compareTo);
     }
 
     @Builder
-    public static class Authority {
+    @Data
+    public static class Access {
+        private final Authority.Role role;
+    }
 
-        private Group group;
+    @Builder
+    @Data
+    @JsonInclude(NON_EMPTY)
+    public static class Authority implements Comparable<Authority> {
 
-        private Role role;
+        @NotNull
+        private final Group group;
 
-        @AllArgsConstructor
-        enum Group {
-            G1(1),
-            G2(2);
+        @NotNull
+        private final Role role;
 
-            int importance;
+        @Override
+        public int compareTo(Authority authority) {
+            return role.getImportance() - authority.role.getImportance();
         }
 
+        enum Group {
+            G1,
+            G2;
+
+            private static final Map<String, Group> MAP = Stream.of(Group.values()).collect(toMap(Enum::name, identity()));
+
+            public static Group fromValue(String value) {
+                return MAP.get(value.toUpperCase());
+            }
+        }
+
+        @RequiredArgsConstructor
         enum Role {
-            R1,
-            R2
+            R1(1),
+            R2(2);
+
+            @Getter
+            private final int importance;
+
+            private static final Map<String, Role> MAP = Stream.of(Role.values()).collect(toMap(Enum::name, identity()));
+
+            public static Role fromValue(String value) {
+                return MAP.get(value.toUpperCase());
+            }
         }
     }
 }
