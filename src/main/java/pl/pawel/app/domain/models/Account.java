@@ -34,4 +34,14 @@ public class Account {
 
     @NotBlank
     private String surname;
+
+    public Account add(){
+        id = repository.getPersistence().add(this);
+        return this;
+    }
+
+    public Account attach(AccountRepository repository){
+        this.repository = repository;
+        return this;
+    }
 }

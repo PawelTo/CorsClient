@@ -14,7 +14,17 @@ public class AccountPersistenceImpl implements AccountPersistence {
     private final AccountMapper mapper;
 
     @Override
+    public Long add(Account account) {
+        return save(account);
+    }
+
+    @Override
     public Account findByCorporateId(String corporateId) {
         return mapper.mapToDomain(repository.findByCorporateId(corporateId));
+    }
+
+    private Long save(Account account) {
+        return repository.save(mapper.mapToPersistence(account))
+                .getId();
     }
 }
