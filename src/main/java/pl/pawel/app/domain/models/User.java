@@ -22,6 +22,8 @@ public class User {
 
     private List<Authority> authorities;
 
+    private String corporateID;
+
     private String name;
 
     private String surname;

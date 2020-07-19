@@ -21,6 +21,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 public class AccountEntity {
 
+    @Column(length = 16)
+    private String corporateID;
+
     @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP not null", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdTimestamp;
