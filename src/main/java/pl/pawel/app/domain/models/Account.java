@@ -17,7 +17,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 @JsonInclude(NON_EMPTY)
 public class Account {
 
-    private String corporateID;
+    private String corporateId;
 
     @Getter(AccessLevel.NONE)
     @JsonIgnore

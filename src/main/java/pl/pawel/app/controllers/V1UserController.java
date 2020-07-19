@@ -10,17 +10,17 @@ import pl.pawel.app.domain.models.User;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping(V1UserController.API_PAHT)
+@RequestMapping(V1UserController.API_PATH)
 @RequiredArgsConstructor
 @RestController
-@Tag(name = V1UserController.API_PAHT)
+@Tag(name = V1UserController.API_PATH)
 public class V1UserController {
 
-    static final String API_PAHT = "/api/v1/user";
+    static final String API_PATH = "/api/v1/user";
 
-    @Operation(summary = "Add film by invoke analysis creation")
+    @Operation(summary = "Get User")
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public User getUser(){
-        return new User();
+        return User.builder().build();
     }
 }

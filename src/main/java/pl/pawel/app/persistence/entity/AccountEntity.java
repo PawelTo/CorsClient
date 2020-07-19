@@ -22,7 +22,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class AccountEntity {
 
     @Column(length = 16)
-    private String corporateID;
+    private String corporateId;
 
     @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP not null", nullable = false, updatable = false)
     @CreationTimestamp
