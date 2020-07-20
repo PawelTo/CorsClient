@@ -21,7 +21,8 @@ public class UserRepository {
 
     public Optional<User> findByCorporateId(String corporateId) {
         Account account = accountRepository.findByCorporateId(corporateId);
-        List<Authority> authorities = authoritiesFromPrivilege(account.getPrivileges());
+        List<Privilege> privileges = account.getPrivileges();
+        List<Authority> authorities = authoritiesFromPrivilege(privileges);
         return Optional.ofNullable(builder()
                 .authorities(authorities)
                 .corporateID(corporateId)
