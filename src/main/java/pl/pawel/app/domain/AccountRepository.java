@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import pl.pawel.app.domain.models.Account;
 import pl.pawel.app.persistence.AccountPersistence;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class AccountRepository {
@@ -13,7 +15,7 @@ public class AccountRepository {
     @Getter
     private final AccountPersistence persistence;
 
-    public Account findByCorporateId(String corporateId){
+    public List<Account> findByCorporateId(String corporateId){
         return persistence.findByCorporateId(corporateId);
     }
 }

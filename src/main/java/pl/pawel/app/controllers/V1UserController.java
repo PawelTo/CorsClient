@@ -32,7 +32,7 @@ public class V1UserController {
 
     @Operation(summary = "Get User")
     @GetMapping(path = "/{corporateId}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable String corporateId) {
+    public ResponseEntity<User> getUser(String corporateId) {
         return userRepository.findByCorporateId(corporateId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> notFound().build());
@@ -42,7 +42,7 @@ public class V1UserController {
     @GetMapping(path = "/add", produces = APPLICATION_JSON_VALUE)
     public List<Account> createAccount() {
         List<Account> accounts = new LinkedList<>();
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 10; i++) {
             Account account = Account.builder()
                     .name("Name" + i)
                     .surname("surname" + i)

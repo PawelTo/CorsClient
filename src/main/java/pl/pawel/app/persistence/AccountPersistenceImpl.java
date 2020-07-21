@@ -6,6 +6,8 @@ import pl.pawel.app.domain.models.Account;
 import pl.pawel.app.persistence.mappers.AccountMapper;
 import pl.pawel.app.persistence.repositories.AccountEntityRepository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class AccountPersistenceImpl implements AccountPersistence {
@@ -19,7 +21,7 @@ public class AccountPersistenceImpl implements AccountPersistence {
     }
 
     @Override
-    public Account findByCorporateId(String corporateId) {
+    public List<Account> findByCorporateId(String corporateId) {
         return mapper.mapToDomain(repository.findByCorporateId(corporateId));
     }
 

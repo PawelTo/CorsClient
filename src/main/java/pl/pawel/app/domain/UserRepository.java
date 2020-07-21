@@ -20,7 +20,8 @@ public class UserRepository {
     private final AccountRepository accountRepository;
 
     public Optional<User> findByCorporateId(String corporateId) {
-        Account account = accountRepository.findByCorporateId(corporateId);
+        Account account = accountRepository.findByCorporateId(corporateId).stream().findFirst().orElse(null);
+        if (account == null) return Optional.empty();
         List<Privilege> privileges = account.getPrivileges();
         List<Authority> authorities = authoritiesFromPrivilege(privileges);
         return Optional.ofNullable(builder()
