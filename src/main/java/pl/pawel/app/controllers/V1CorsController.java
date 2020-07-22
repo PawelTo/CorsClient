@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.pawel.app.domain.models.CorsRecivedModel;
 import pl.pawel.app.domain.services.LocalHostCaller;
 
-@RequestMapping(V1CorsController.API_PAHT)
+@RequestMapping(V1CorsController.API_PATH)
 @RestController
 public class V1CorsController {
 
-    static final String API_PAHT = "/cors-server";
+    static final String API_PATH = "/cors-server";
 
     @Autowired
     private LocalHostCaller localHostCaller;

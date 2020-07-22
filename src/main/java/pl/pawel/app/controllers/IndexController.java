@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = IndexController.API_PAHT)
+@RequestMapping(value = IndexController.API_PATH)
 public class IndexController {
 
-    static final String API_PAHT = "/index-html";
+    static final String API_PATH = "/index-html";
 
     @GetMapping()
     public String getIndex(Model model){
