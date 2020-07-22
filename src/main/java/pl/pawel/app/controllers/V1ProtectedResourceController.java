@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(V1ProtectedResourceController.API_PAHT)
+@RequestMapping(V1ProtectedResourceController.API_PATH)
 @RestController
 public class V1ProtectedResourceController {
 
-    static final String API_PAHT = "/api/v1/security-resources";
+    static final String API_PATH = "/api/v1/security-resources";
 
     @GetMapping(value= "/all")
     public String returnedForAll(){
