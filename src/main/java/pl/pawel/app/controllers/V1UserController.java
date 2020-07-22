@@ -25,7 +25,7 @@ import static org.springframework.http.ResponseEntity.notFound;
 @Tag(name = V1UserController.API_PATH)
 public class V1UserController {
 
-    static final String API_PATH = "/api/v1/user";
+    static final String API_PATH = "/api/v1/users";
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;

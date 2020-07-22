@@ -8,6 +8,8 @@ import pl.pawel.app.persistence.repositories.AccountEntityRepository;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Repository
 @RequiredArgsConstructor
 public class AccountPersistenceImpl implements AccountPersistence {
@@ -18,6 +20,12 @@ public class AccountPersistenceImpl implements AccountPersistence {
     @Override
     public Long add(Account account) {
         return save(account);
+    }
+
+    public List<Account> findAll() {
+        return repository.findAll().stream()
+                .map(mapper::mapToDomain)
+                .collect(toList());
     }
 
     @Override

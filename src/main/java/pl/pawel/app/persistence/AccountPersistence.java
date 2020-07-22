@@ -8,5 +8,7 @@ public interface AccountPersistence {
 
     Long add(Account account);
 
+    List<Account> findAll();
+
     List<Account> findByCorporateId(String corporateId);
 }

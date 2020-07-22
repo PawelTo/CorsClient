@@ -15,6 +15,10 @@ public class AccountRepository {
     @Getter
     private final AccountPersistence persistence;
 
+    public List<Account> findAll() {
+        return persistence.findAll();
+    }
+
     public List<Account> findByCorporateId(String corporateId){
         return persistence.findByCorporateId(corporateId);
     }
