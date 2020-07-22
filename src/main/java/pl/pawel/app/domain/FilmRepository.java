@@ -8,6 +8,7 @@ import pl.pawel.app.domain.models.Film;
 import pl.pawel.app.persistence.FilmPersistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -30,5 +31,10 @@ public class FilmRepository {
         return findAll().stream()
                 .map(Film::getProducer)
                 .collect(toList());
+    }
+
+    public Optional<Film> findById(String filmId) {
+        return persistence.findById(Long.valueOf(filmId))
+                .map(film -> film.attach(this));
     }
 }

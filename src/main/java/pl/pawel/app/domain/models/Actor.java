@@ -32,10 +32,16 @@ public class Actor {
     @NotBlank
     private String surname;
 
+    public Actor attach(ActorRepository actorRepository){
+        repository = actorRepository;
+        return this;
+    }
+
     public Actor add(){
         id = repository.getPersistence().add(this);
         return this;
     }
+
     public enum Sex {
         MAN,
         WOMAN,
